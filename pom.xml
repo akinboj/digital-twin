@@ -11,16 +11,18 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <version-org.apache.camel>3.21.0</version-org.apache.camel>
+        <version-org.apache.camel>3.22.0</version-org.apache.camel>
         <version-org.apache.kafka>3.6.0</version-org.apache.kafka>
         <version-ca.uhn.hapi>2.5.1</version-ca.uhn.hapi>
         <version-org.slf4j>1.7.36</version-org.slf4j>
         <version-io.grpc>1.62.2</version-io.grpc>
+        <version-org.apache.camel.quarkus>3.8.0</version-org.apache.camel.quarkus> <!-- Optional Quarkus -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Internal Placeholders -->
             <dependency>
                 <groupId>net.healthcare.digitaltwin</groupId>
                 <artifactId>twin-core</artifactId>
@@ -31,9 +33,40 @@
                 <artifactId>twin-routes</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
+
+            <!-- Apache Camel BOM (version consistency) -->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-bom</artifactId>
+                <version>${version-org.apache.camel}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Camel Components -->
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-core</artifactId>
+                <version>${version-org.apache.camel}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-mllp</artifactId>
+                <version>${version-org.apache.camel}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-http</artifactId>
+                <version>${version-org.apache.camel}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-cxf</artifactId>
+                <version>${version-org.apache.camel}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-file</artifactId>
                 <version>${version-org.apache.camel}</version>
             </dependency>
             <dependency>
@@ -46,11 +79,15 @@
                 <artifactId>camel-hl7</artifactId>
                 <version>${version-org.apache.camel}</version>
             </dependency>
+
+            <!-- Kafka -->
             <dependency>
                 <groupId>org.apache.kafka</groupId>
                 <artifactId>kafka-clients</artifactId>
                 <version>${version-org.apache.kafka}</version>
             </dependency>
+
+            <!-- HAPI -->
             <dependency>
                 <groupId>ca.uhn.hapi</groupId>
                 <artifactId>hapi-base</artifactId>
@@ -58,9 +95,11 @@
             </dependency>
             <dependency>
                 <groupId>ca.uhn.hapi</groupId>
-                <artifactId>hapi-structures-v23</artifactId>
-                <version>${version-ca.uhn.hapi}</version>
+                <artifactId>hapi-structures-v24</artifactId>
+                <version>${version-ca.uhn.hapi}</version> <!-- Updated to 2.4 -->
             </dependency>
+
+            <!-- Logging -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -90,6 +129,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>3.2.4</version>
+                </plugin>
+                <!-- Optional Quarkus -->
+                <plugin>
+                    <groupId>io.quarkus</groupId>
+                    <artifactId>quarkus-maven-plugin</artifactId>
+                    <version>${version-org.apache.camel.quarkus}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
