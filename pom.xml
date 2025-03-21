@@ -16,6 +16,7 @@
         <version-ca.uhn.hapi>2.5.1</version-ca.uhn.hapi>
         <version-org.slf4j>1.7.36</version-org.slf4j>
         <version-io.grpc>1.62.2</version-io.grpc>
+        <version-ch.qos.logback>1.2.11</version-ch.qos.logback>
         <version-org.apache.camel.quarkus>3.8.0</version-org.apache.camel.quarkus> <!-- Optional Quarkus -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -96,7 +97,7 @@
             <dependency>
                 <groupId>ca.uhn.hapi</groupId>
                 <artifactId>hapi-structures-v24</artifactId>
-                <version>${version-ca.uhn.hapi}</version> <!-- Updated to 2.4 -->
+                <version>${version-ca.uhn.hapi}</version>
             </dependency>
 
             <!-- Logging -->
@@ -108,7 +109,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.11</version>
+                <version>${version-ch.qos.logback}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
